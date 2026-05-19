@@ -1,101 +1,143 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
+import dynamic from 'next/dynamic'
+
+// Dynamically import the ThreeBackground to prevent Server-Side Rendering (SSR) issues
+const ThreeBackground = dynamic(() => import('@/components/ThreeBackground'), { ssr: false })
 
 const blogs = [
   {
-    title: 'Architecting AI Contact Centers at Scale',
+    title: 'Architecting AI Contact Centers',
     date: 'May 12, 2026',
-    desc: 'Deep dive into the challenges of building real-time voice-to-voice AI architectures using SIP telephony and multimodal LLMs for government-scale traffic.',
+    desc: 'Challenges of voice-to-voice AI architectures using SIP telephony and LLMs for government-scale traffic.',
     readTime: '6 min read'
   },
   {
-    title: 'Agentic Workflows in Cloud Operations',
+    title: 'Agentic Workflows in Cloud Ops',
     date: 'March 28, 2026',
-    desc: 'How we transitioned from static runbooks to conversational, autonomous agents for handling ITSM and CI/CD pipelines.',
+    desc: 'Transitioning from static runbooks to conversational, autonomous agents for handling ITSM.',
     readTime: '5 min read'
   },
   {
-    title: 'Beyond RAG: The Future of Enterprise AI',
+    title: 'Beyond RAG: Bounded Execution',
     date: 'February 15, 2026',
-    desc: 'Retrieval-Augmented Generation is just the beginning. Exploring self-correcting deterministic parsers and bounded execution loops.',
+    desc: 'Exploring self-correcting deterministic parsers and bounded execution loops.',
     readTime: '8 min read'
   }
 ]
 
 const projects = [
   {
-    client: 'National Gov Marketplace & Top Telecom',
+    client: 'National Gov Marketplace',
     name: 'AI Contact Centre',
-    desc: 'Real-time voice-to-voice AI contact centre for a national government marketplace and a leading telecom provider. SIP telephony, RAG-grounded knowledge base, multimodal LLM, and human escalation.',
-    tags: ['Voice AI', 'AWS', 'RAG', 'Contact Centre', 'SIP'],
-    featured: true,
+    desc: 'Real-time voice-to-voice AI contact centre using SIP telephony, dynamic RAG-grounded knowledge base, and human-in-the-loop escalation.',
+    tags: ['Voice AI', 'AWS', 'RAG', 'SIP'],
+    metric: '1,000+ Calls/Sec Capacity'
   },
   {
-    client: 'Global Automotive Manufacturer',
+    client: 'Global Automotive Leader',
     name: 'Agentic IT Operations',
-    desc: 'Conversational agent that captures cloud ops requests in plain English, validates against enterprise knowledge, creates support tickets, and auto-triggers deployment pipelines.',
+    desc: 'Conversational agent capturing operations requests in plain English, validating infrastructure, and triggering deployment pipelines.',
     tags: ['Cloud', 'ITSM', 'CI/CD', 'Agentic AI'],
+    metric: '92% Manual Tasks Reduced'
   },
   {
     client: 'Major Food Distributor',
     name: 'Agentic Document Parser',
-    desc: 'Replaced a legacy unsupported desktop tool with an agentic cloud platform. Unstructured data → structured rules → deterministic parser → golden-output validation → bounded self-correction loop.',
-    tags: ['Cloud AI', 'Serverless', 'Agentic'],
+    desc: 'Cloud-native unstructured data parser utilizing complex self-correction loops and golden-output validation schemas.',
+    tags: ['Serverless', 'Agentic', 'Python'],
+    metric: '99.4% Parsing Accuracy'
   },
   {
     client: 'UAE Aviation Catering',
-    name: 'Intelligent Rostering System',
-    desc: 'AI-driven workforce management covering long-term forecasting (3–6 months), scenario-based rostering, and real-time dynamic allocation. Integrated with core enterprise systems.',
-    tags: ['Machine Learning', 'Forecasting', 'Rostering', 'ERP'],
+    name: 'Intelligent Rostering',
+    desc: 'AI-driven workforce planning covering scenario-based rostering, long-term forecasting, and dynamic real-time crew allocation.',
+    tags: ['Machine Learning', 'Forecasting', 'ERP'],
+    metric: '3-6 Mon Workforce Forecast'
   },
   {
-    client: 'Global System Integrator (Internal)',
+    client: 'Internal GSI Super-App',
     name: 'Prompt-to-Product Platform',
-    desc: 'Internal prompt-to-product platform for enterprise employees. Describe what you want in natural language — get a deployed full-stack app. Multi-model approach for code generation, design, and planning.',
+    desc: 'Describe tools in plain language to deploy running full-stack applications. Utilizes multi-model orchestrator pipelines.',
     tags: ['LLMs', 'React', 'FastAPI', 'Multi-model'],
+    metric: 'Deployed in < 2 Mins'
   },
   {
-    client: 'Global System Integrator (Internal)',
+    client: 'Internal GSI Super-App',
     name: 'Enterprise Content Engine',
-    desc: 'Suite of scheduled AI agents producing blogs, audio podcasts, news, and community content for an enterprise employee super-app. High adoption with robust daily active usage.',
-    tags: ['Content Agents', 'Automation', 'LLM', 'Python'],
-  },
+    desc: 'Scheduled AI content agents generating articles, audio podcasts, and market insights automatically for employee channels.',
+    tags: ['Agents', 'Automation', 'Python'],
+    metric: '15K+ Active Users Daily'
+  }
 ]
 
-const skills = [
+const skillCategories = [
   {
-    name: 'Cloud & Infra',
-    items: ['AWS Bedrock, Lambda, Step Functions', 'API Gateway, S3, OpenSearch', 'Amazon Connect', 'Azure ML, Cognitive Services', 'Azure DevOps'],
+    name: 'AI / ML & Orchestration',
+    percentage: 95,
+    items: ['LLM Orchestration', 'RAG & CAG Pipelines', 'Agentic Workflows', 'Voice AI & SIP Telephony', 'Demand Forecasting']
   },
   {
-    name: 'AI / ML',
-    items: ['LLM Orchestration', 'RAG / CAG Pipelines', 'Agentic Workflows', 'Voice AI & SIP Telephony', 'Demand Forecasting'],
+    name: 'Cloud & Infrastructure',
+    percentage: 90,
+    items: ['AWS (Bedrock, Lambda, Step Functions)', 'API Gateway, S3, OpenSearch', 'Amazon Connect', 'Azure DevOps & ML']
   },
   {
-    name: 'Integrations',
-    items: ['ServiceNow', 'Azure DevOps', 'SAP', 'AODB, BioStar', 'WhatsApp Business API'],
+    name: 'Integrations & Enterprise',
+    percentage: 88,
+    items: ['ServiceNow ITSM', 'SAP Systems', 'AODB & BioStar API', 'WhatsApp Business APIs']
   },
   {
-    name: 'Development',
-    items: ['React, Next.js, Vite', 'FastAPI, Python', 'PySpark', 'TypeScript'],
-  },
-  {
-    name: 'Models',
-    items: ['GPT-5', 'Gemini', 'Claude', 'Open-source LLMs', 'Multimodal AI'],
-  },
-  {
-    name: 'Leadership',
-    items: ['Solution Architecture', 'Pre-sales Solutioning', 'Stakeholder Management', 'Team of 50 members', 'Community of 15K+'],
-  },
+    name: 'Modern Development',
+    percentage: 85,
+    items: ['React, Next.js, Vite', 'FastAPI, Python', 'PySpark Big Data', 'TypeScript']
+  }
 ]
+
+const experience = [
+  {
+    period: 'Aug 2025 — Present',
+    company: 'Global System Integrator',
+    role: 'AI Architect',
+    highlight: 'Led 50-member team building 15+ complex enterprise AI systems.'
+  },
+  {
+    period: 'May 2025 — Aug 2025',
+    company: 'Regional Healthcare Provider',
+    role: 'Head of Patient Experience',
+    highlight: 'Scaled communication systems to 1,000+ daily inquiries via WhatsApp.'
+  },
+  {
+    period: 'May 2023 — Jul 2023',
+    company: 'First Door Health',
+    role: 'Full Stack Intern',
+    highlight: 'Contributed to full-stack health-tech modules.'
+  }
+]
+
+const sectionCoordinates: Record<string, string> = {
+  home: 'COORD. [0.0, 0.0, 160.0]',
+  about: 'COORD. [-60.0, 25.0, 45.0]',
+  projects: 'COORD. [70.0, 30.0, -35.0]',
+  skills: 'COORD. [-45.0, -40.0, -50.0]',
+  writing: 'COORD. [55.0, -35.0, 45.0]',
+  experience: 'COORD. [0.0, 60.0, -70.0]',
+  contact: 'COORD. [0.0, -55.0, 15.0]'
+}
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState('home')
+  const [activeProject, setActiveProject] = useState(0)
+  const [activeSkill, setActiveSkill] = useState(0)
+  
   const cursorRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // Sleek interactive custom cursor
   useEffect(() => {
+    if (window.matchMedia('(pointer: coarse)').matches) return
     const cursor = cursorRef.current
     const ring = ringRef.current
     if (!cursor || !ring) return
@@ -111,8 +153,8 @@ export default function Home() {
     }
 
     const animate = () => {
-      ringX += (mouseX - ringX) * 0.12
-      ringY += (mouseY - ringY) * 0.12
+      ringX += (mouseX - ringX) * 0.15
+      ringY += (mouseY - ringY) * 0.15
       ring.style.left = ringX + 'px'
       ring.style.top = ringY + 'px'
       requestAnimationFrame(animate)
@@ -122,297 +164,413 @@ export default function Home() {
     const onLeave = () => ring.classList.remove('hovering')
 
     document.addEventListener('mousemove', onMove)
-    document.querySelectorAll('a, button, .project-card').forEach(el => {
-      el.addEventListener('mouseenter', onEnter)
-      el.addEventListener('mouseleave', onLeave)
-    })
-
+    
+    // Add hovering class to standard interactives
+    const addListeners = () => {
+      document.querySelectorAll('a, button, .interactive-card').forEach(el => {
+        el.addEventListener('mouseenter', onEnter)
+        el.addEventListener('mouseleave', onLeave)
+      })
+    }
+    
+    addListeners()
     animate()
-    return () => document.removeEventListener('mousemove', onMove)
+
+    // Re-observe DOM changes to hook new elements entering screen
+    const observer = new MutationObserver(addListeners)
+    observer.observe(document.body, { childList: true, subtree: true })
+
+    return () => {
+      document.removeEventListener('mousemove', onMove)
+      observer.disconnect()
+    }
   }, [])
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
-      { threshold: 0.05 }
-    )
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  const selectSection = (secId: string) => {
+    setActiveSection(secId)
+  }
 
   return (
     <>
-      <div className="cursor" ref={cursorRef} />
-      <div className="cursor-ring" ref={ringRef} />
+      <div className="cursor hidden md:block" ref={cursorRef} />
+      <div className="cursor-ring hidden md:block" ref={ringRef} />
+      
+      {/* Dynamic Cybernetic HUD Overlay Details */}
+      <div className="scanlines" />
+      <div className="noise-overlay" />
+      <div className="hero-grid" />
+      
+      {/* 3D WebGL Canvas Layer */}
+      <ThreeBackground 
+        activeSection={activeSection} 
+        activeProjectIndex={activeProject} 
+        onNodeClick={selectSection}
+      />
 
-      {/* NAV */}
-      <nav className="nav">
-        <a href="#" className="nav-logo mono">JA</a>
-        <button className={`nav-toggle ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <span className="hamburger"></span>
-        </button>
-        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About</a></li>
-          <li><a href="#projects" onClick={() => setIsMenuOpen(false)}>Projects</a></li>
-          <li><a href="#skills" onClick={() => setIsMenuOpen(false)}>Skills</a></li>
-          <li><a href="#blog" onClick={() => setIsMenuOpen(false)}>Writing</a></li>
-          <li><a href="#experience" onClick={() => setIsMenuOpen(false)}>Experience</a></li>
-          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
-        </ul>
-      </nav>
+      {/* TOP HEADER HUD */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5 flex justify-between items-center border-b border-white-faint backdrop-blur-md bg-navy/20 select-none">
+        <div className="flex items-center gap-4">
+          <button onClick={() => selectSection('home')} className="font-mono text-[0.72rem] tracking-[0.2em] uppercase text-gold hover:text-gold-light transition-colors flex items-center gap-2">
+            <span className="w-1.5 h-1.5 bg-gold rounded-full animate-ping" />
+            JA // CORE.01
+          </button>
+        </div>
+        
+        {/* Navigation overlay */}
+        <nav>
+          <ul className="flex items-center gap-4 md:gap-8">
+            {['About', 'Projects', 'Skills', 'Writing', 'Experience', 'Contact'].map((item) => {
+              const secId = item.toLowerCase()
+              const isSelected = activeSection === secId
+              return (
+                <li key={item}>
+                  <button 
+                    onClick={() => selectSection(secId)} 
+                    className={`font-mono text-[0.68rem] tracking-[0.15em] uppercase transition-all duration-300 ${isSelected ? 'text-gold text-glow border-b border-gold pb-1' : 'text-white-dim hover:text-white'}`}
+                  >
+                    {item}
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
+      </header>
 
-      {/* HERO */}
-      <section className="hero" id="home">
-        <div className="hero-grid" />
-        <div className="hero-glow" />
-        <div className="hero-inner">
-          <div className="hero-content">
-            <div className="hero-tag mono">AI Engineer · Solutions Architect</div>
-            <h1 className="hero-name display">
-              Jatin<br /><em>Agrawal</em>
-            </h1>
-            <p className="hero-title display">Building AI tools that solve real problems.</p>
-            <p className="hero-desc">
-              I'm an AI Engineer currently working at an Enterprise Innovation Lab. I focus on building practical AI systems—from voice-based contact centers to automated cloud workflows—that actually make a difference.
-            </p>
-            <div className="hero-stats">
-              <div className="stat-item">
-                <div className="stat-num display">15+</div>
-                <div className="stat-label mono">AI Solutions Built</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-num display">4+</div>
-                <div className="stat-label mono">Industries Served</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-num display">50+</div>
-                <div className="stat-label mono">Team Members</div>
-              </div>
-            </div>
-            <div className="hero-cta">
-              <a href="#projects" className="btn-primary">View Work</a>
-              <a href="#contact" className="btn-ghost">Get In Touch</a>
-            </div>
-          </div>
-          <div className="hero-visual fade-up fade-up-delay-2">
-            <div className="hero-image-wrapper">
-              <img src="/img/6082143393514462268.jpg" alt="Jatin Agrawal" className="hero-image" />
-              <div className="hero-image-accent"></div>
-            </div>
-          </div>
+      {/* BOTTOM CONTROL STATUS BAR */}
+      <footer className="fixed bottom-0 left-0 right-0 z-50 px-6 md:px-12 py-4 flex justify-between items-center border-t border-white-faint backdrop-blur-md bg-navy/20 font-mono text-[0.62rem] text-white-dim select-none">
+        <div className="flex items-center gap-3">
+          <span className="text-gold font-semibold">{sectionCoordinates[activeSection] || 'COORD. [---]'}</span>
         </div>
-        <div className="hero-scroll">
-          <div className="scroll-line" />
-          <span className="mono">Scroll</span>
+        <div className="hidden md:flex gap-6">
+          <span>SYS.STATUS: OPERATIONAL</span>
+          <span>FPS: 60 // GL_RENDER</span>
         </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about">
-        <div className="section-header fade-up">
-          <span className="section-num mono">01</span>
-          <h2 className="section-title display">About</h2>
-          <div className="section-line" />
+        <div>
+          <span className="uppercase text-gold">SECTOR // {activeSection}</span>
         </div>
-        <div className="about-grid">
-          <div className="about-text fade-up fade-up-delay-1">
-            <p>
-              I've always been driven to step outside the traditional career script. Early on, instead of sticking to routine tasks, I found myself helping to design a <em>large-scale AI contact center</em>, mapping out workforce systems for the aviation industry, and building internal AI tools.
-            </p>
-            <p>
-              What really excites me is the intersection of <strong>AI and real-world complexity</strong>. To me, the most interesting challenge isn't just the AI model itself, but how it fits into the bigger picture—managing the human handoffs, ensuring reliability, and integrating it smoothly into everyday operations.
-            </p>
-            <p>
-              I also have the privilege of leading an <strong>Enterprise AI Delivery Team</strong> of about 50 members. We collaborate within a larger innovation community to run hackathons, build proof-of-concepts, and host tech events.
-            </p>
-            <p>
-              Looking forward, I'm eager to get more involved in product thinking. I want to help shape <em>what</em> we build and <em>why</em> we build it, rather than just figuring out how to build it.
-            </p>
-          </div>
-          <div className="about-sidebar fade-up fade-up-delay-2">
-            <div className="about-image-wrapper mb-2">
-              <img src="/img/6082143393514462267.jpg" alt="Speaking at an event" className="about-image" />
-            </div>
-            <div className="sidebar-block">
-              <div className="sidebar-label mono">Currently</div>
-              <div className="sidebar-content">AI Engineer at a Global System Integrator. Leading an AI delivery community across 4+ sectors.</div>
-            </div>
-            <div className="sidebar-block">
-              <div className="sidebar-label mono">Education</div>
-              <div className="sidebar-content">B.Tech — Computer Software Engineering<br />Gyan Ganga College of Technology<br />2020 – 2024</div>
-            </div>
-            <div className="sidebar-block">
-              <div className="sidebar-label mono">Certifications</div>
-              <div className="sidebar-content">
-                AWS Cloud Architecting<br />
-                AWS ML Foundations<br />
-                AWS Cloud Foundations<br />
-                CCNA: Intro to Networks<br />
-                Cisco Cybersecurity
-              </div>
-            </div>
-            <div className="sidebar-block">
-              <div className="sidebar-label mono">Looking For</div>
-              <div className="sidebar-content">End-to-end ownership. Fast team. Agentic AI, voice AI, or enterprise automation. Close to the product.</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS */}
-      <section id="projects" className="projects-bg">
-        <div className="section-header fade-up">
-          <span className="section-num mono">02</span>
-          <h2 className="section-title display">Projects</h2>
-          <div className="section-line" />
-        </div>
-        <div className="projects-grid">
-          {projects.map((p, i) => (
-            <div key={i} className={`project-card fade-up${p.featured ? ' project-featured' : ''}`} style={{ transitionDelay: `${i * 0.05}s` }}>
-              <div className="project-client mono">{p.client}</div>
-              <div className="project-name display">{p.name}</div>
-              <div className="project-desc">{p.desc}</div>
-              <div className="project-tags">
-                {p.tags.map(t => <span key={t} className="tag mono">{t}</span>)}
-              </div>
-              <span className="project-arrow">↗</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SKILLS */}
-      <section id="skills">
-        <div className="section-header fade-up">
-          <span className="section-num mono">03</span>
-          <h2 className="section-title display">Skills</h2>
-          <div className="section-line" />
-        </div>
-        <div className="skills-grid">
-          {skills.map((s, i) => (
-            <div key={i} className="skill-category fade-up" data-num={`0${i + 1}`} style={{ transitionDelay: `${i * 0.08}s` }}>
-              <div className="skill-cat-name mono">{s.name}</div>
-              <ul className="skill-list">
-                {s.items.map(item => <li key={item}>{item}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* BLOG */}
-      <section id="blog">
-        <div className="section-header fade-up">
-          <span className="section-num mono">04</span>
-          <h2 className="section-title display">Writing</h2>
-          <div className="section-line" />
-        </div>
-        <div className="blog-container">
-          <div className="blog-visual fade-up">
-             <img src="/img/6082143393514462270.jpg" alt="Whiteboard session" className="blog-image" />
-          </div>
-          <div className="blog-grid">
-            {blogs.map((b, i) => (
-              <div key={i} className="blog-card fade-up" style={{ transitionDelay: `${i * 0.1}s` }}>
-                <div className="blog-meta mono">
-                  <span>{b.date}</span>
-                  <span className="blog-dot">·</span>
-                  <span>{b.readTime}</span>
-                </div>
-                <h3 className="blog-title display">{b.title}</h3>
-                <p className="blog-desc">{b.desc}</p>
-                <a href="#" className="blog-link mono">Read Article ↗</a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* EXPERIENCE */}
-      <section id="experience">
-        <div className="section-header fade-up">
-          <span className="section-num mono">05</span>
-          <h2 className="section-title display">Experience</h2>
-          <div className="section-line" />
-        </div>
-        <div className="experience-list">
-          <div className="exp-item fade-up">
-            <div className="exp-meta">
-              <div className="exp-period mono">Aug 2025 — Present</div>
-              <div className="exp-company">Global System Integrator</div>
-              <div className="exp-location">India</div>
-            </div>
-            <div className="exp-content">
-              <div className="exp-role display">AI Engineer & Solutions Architect</div>
-              <ul className="exp-bullets">
-                <li>Led an internal AI delivery team of 50 members, collaborating on over 15 different AI solutions and proof-of-concepts for various industries.</li>
-                <li>Helped design scalable AI contact center architectures for a national government marketplace and a leading telecom provider, integrating voice telephony and AI models.</li>
-                <li>Developed automated cloud operations tools for a global automotive manufacturer and an AWS-native document parser for a major food distributor.</li>
-                <li>Contributed to workforce planning systems for the aviation sector, focusing on AI forecasting, rostering, and ERP integration.</li>
-                <li>Assisted with pre-sales solutioning and presented technical pitches across the government, hospitality, healthcare, and gaming sectors.</li>
-              </ul>
-            </div>
-          </div>
-          <div className="exp-item fade-up fade-up-delay-1">
-            <div className="exp-meta">
-              <div className="exp-period mono">May 2025 — Aug 2025</div>
-              <div className="exp-company">Regional Healthcare Provider</div>
-              <div className="exp-location">India</div>
-            </div>
-            <div className="exp-content">
-              <div className="exp-role display">Head of Patient Experience</div>
-              <ul className="exp-bullets">
-                <li>Built an end-to-end call center and patient communication system from scratch, scaling it to handle 1,000+ daily inquiries via phone and WhatsApp.</li>
-                <li>Implemented WhatsApp Business automation to help resolve patient queries more efficiently.</li>
-                <li>Managed the launch strategy for SEO and Meta Ads, which increased appointment bookings during peak campaigns.</li>
-              </ul>
-            </div>
-          </div>
-          <div className="exp-item fade-up fade-up-delay-2">
-            <div className="exp-meta">
-              <div className="exp-period mono">May 2023 — Jul 2023</div>
-              <div className="exp-company">First Door Health</div>
-              <div className="exp-location">Jabalpur, India</div>
-            </div>
-            <div className="exp-content">
-              <div className="exp-role display">Full Stack Developer Intern</div>
-              <ul className="exp-bullets">
-                <li>Contributed to full-stack development of a health-tech platform.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="contact-bg">
-        <div className="contact-inner">
-          <div className="contact-pre mono fade-up">Get In Touch</div>
-          <h2 className="contact-heading display fade-up fade-up-delay-1">
-            Let's build something <em>real.</em>
-          </h2>
-          <p className="contact-sub fade-up fade-up-delay-2">
-            I'm open to roles where I own problems end-to-end — agentic AI, voice AI, enterprise automation. If that resonates, reach out.
-          </p>
-          <div className="contact-links fade-up fade-up-delay-3">
-            <a href="mailto:jatinagrawal942@gmail.com" className="contact-link mono">
-              ✉ Email
-            </a>
-            <a href="https://linkedin.com/in/jatin--agrawal" target="_blank" rel="noopener noreferrer" className="contact-link mono">
-              ↗ LinkedIn
-            </a>
-            <a href="tel:+917773066808" className="contact-link mono">
-              ✆ Call
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <footer>
-        <p className="mono">© 2025 Jatin Agrawal</p>
-        <p className="mono">AI Engineer & Solutions Architect</p>
       </footer>
+
+      {/* FLOATING GLASS UI PANELS (Dynamically Rendered depending on Active Section) */}
+      <main className="absolute inset-0 w-full h-full flex items-center justify-start z-10 pointer-events-none px-6 md:px-16 pt-24 pb-16">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between">
+          
+          {/* LEFT INTERACTIVE PANEL */}
+          <div className="w-full md:w-[480px] h-[520px] pointer-events-auto relative">
+            
+            {/* HERO SECTION VIEW */}
+            <div className={`absolute inset-0 flex flex-col justify-center transition-all duration-500 ease-out ${activeSection === 'home' ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-x-12 scale-95 pointer-events-none'}`}>
+              <div className="font-mono text-[0.7rem] tracking-[0.25em] uppercase text-gold mb-3 flex items-center gap-2">
+                <span>AI Engineer & Solutions Architect</span>
+              </div>
+              <h1 className="font-serif text-5xl md:text-7xl leading-[0.9] text-white mb-6">
+                Jatin <br /><em className="italic text-gold font-normal">Agrawal</em>
+              </h1>
+              <p className="text-[0.92rem] text-white-dim leading-[1.6] mb-10 max-w-[360px] font-light">
+                Engineering high-scale, production-grade AI architectures and autonomous agents for enterprise execution.
+              </p>
+              
+              {/* Minimalist Grid Stat Cards */}
+              <div className="grid grid-cols-3 gap-3 mb-8">
+                {[
+                  { num: '15+', label: 'AI Deployed' },
+                  { num: '50+', label: 'Engineers Led' },
+                  { num: '4+', label: 'Verticals' }
+                ].map((stat, i) => (
+                  <div key={i} className="bg-navy-mid/20 border border-white-faint p-3 rounded-lg flex flex-col justify-center cursor-default">
+                    <span className="font-serif text-[1.5rem] text-gold leading-none">{stat.num}</span>
+                    <span className="font-mono text-[0.52rem] uppercase tracking-wider text-white-dim mt-1.5">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="flex gap-4">
+                <button onClick={() => selectSection('projects')} className="glow-btn">
+                  Explore Systems
+                </button>
+                <button onClick={() => selectSection('contact')} className="font-mono text-[0.68rem] tracking-[0.1em] text-white-dim hover:text-gold uppercase transition-colors">
+                  Contact Engine
+                </button>
+              </div>
+            </div>
+
+            {/* ABOUT SECTION VIEW */}
+            <div className={`absolute inset-0 glass-panel p-8 flex flex-col justify-between transition-all duration-500 ease-out ${activeSection === 'about' ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-x-12 scale-95 pointer-events-none'}`}>
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="font-mono text-[0.6rem] text-gold border border-gold/30 px-2 py-0.5 rounded">SEC_01</span>
+                  <h2 className="font-serif text-2xl md:text-3xl text-white">Philosophy</h2>
+                </div>
+                <p className="text-[0.9rem] text-white-dim leading-[1.7] mb-8 font-light">
+                  Bridging the gap between advanced models and real-world complexity. I specialize in turning complex agentic concepts into secure, self-correcting pipelines that run at scale.
+                </p>
+                
+                <div className="space-y-4">
+                  <div className="border-l-2 border-gold/50 pl-4 py-1">
+                    <div className="font-mono text-[0.58rem] tracking-[0.1em] uppercase text-gold">Currently</div>
+                    <div className="text-[0.78rem] text-white font-medium mt-0.5">AI Architect @ TCS Labs (India)</div>
+                  </div>
+                  <div className="border-l-2 border-gold/50 pl-4 py-1">
+                    <div className="font-mono text-[0.58rem] tracking-[0.1em] uppercase text-gold">B.Tech Software Engineering</div>
+                    <div className="text-[0.78rem] text-white-dim mt-0.5 font-light">Gyan Ganga College of Technology (2020 - 2024)</div>
+                  </div>
+                  <div className="border-l-2 border-gold/50 pl-4 py-1">
+                    <div className="font-mono text-[0.58rem] tracking-[0.1em] uppercase text-gold">Certifications</div>
+                    <div className="text-[0.78rem] text-white-dim mt-0.5 font-light">AWS Solutions Architect · AWS Machine Learning · Cisco Networking</div>
+                  </div>
+                </div>
+              </div>
+              
+              <button onClick={() => selectSection('projects')} className="glow-btn mt-6 w-full text-center">
+                System Artifacts →
+              </button>
+            </div>
+
+            {/* PROJECTS SECTION VIEW (WITH DYNAMIC CAROUSEL LINKED TO 3D NODE) */}
+            <div className={`absolute inset-0 glass-panel p-8 flex flex-col justify-between transition-all duration-500 ease-out ${activeSection === 'projects' ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-x-12 scale-95 pointer-events-none'}`}>
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[0.6rem] text-gold border border-gold/30 px-2 py-0.5 rounded">SEC_02</span>
+                    <h2 className="font-serif text-2xl md:text-3xl text-white">Systems</h2>
+                  </div>
+                  <span className="font-mono text-[0.62rem] text-gold tracking-widest bg-gold/10 px-2.5 py-1 rounded-full">
+                    {activeProject + 1} / {projects.length}
+                  </span>
+                </div>
+
+                <div className="mb-4">
+                  <span className="font-mono text-[0.58rem] uppercase tracking-wider text-gold-light">{projects[activeProject].client}</span>
+                  <h3 className="font-serif text-[1.4rem] text-white mt-0.5 leading-tight">{projects[activeProject].name}</h3>
+                </div>
+
+                <p className="text-[0.82rem] text-white-dim leading-[1.6] mb-5 font-light">
+                  {projects[activeProject].desc}
+                </p>
+
+                {/* Key Accomplishment Metric Callout */}
+                <div className="bg-gold/5 border border-gold/15 p-3 rounded-lg mb-4">
+                  <div className="font-mono text-[0.52rem] uppercase tracking-wider text-gold">Key Metric Objective</div>
+                  <div className="text-[0.88rem] text-white font-medium mt-0.5">{projects[activeProject].metric}</div>
+                </div>
+
+                {/* Tech Chips */}
+                <div className="flex flex-wrap gap-1.5">
+                  {projects[activeProject].tags.map(t => (
+                    <span key={t} className="font-mono text-[0.52rem] bg-white-faint border border-white-faint px-2 py-1 rounded text-white-dim">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Slider Controller buttons */}
+              <div className="flex gap-3 mt-6">
+                <button 
+                  onClick={() => setActiveProject(prev => (prev === 0 ? projects.length - 1 : prev - 1))}
+                  className="flex-1 py-2 border border-gold/30 text-gold hover:border-gold hover:bg-gold/5 transition-all text-[0.68rem] font-mono uppercase tracking-widest rounded-lg"
+                >
+                  ◄ Previous
+                </button>
+                <button 
+                  onClick={() => setActiveProject(prev => (prev === projects.length - 1 ? 0 : prev + 1))}
+                  className="flex-1 py-2 bg-gold text-navy hover:bg-gold-light transition-all text-[0.68rem] font-mono uppercase tracking-widest font-bold rounded-lg"
+                >
+                  Next ►
+                </button>
+              </div>
+            </div>
+
+            {/* SKILLS SECTION VIEW */}
+            <div className={`absolute inset-0 glass-panel p-8 flex flex-col justify-between transition-all duration-500 ease-out ${activeSection === 'skills' ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-x-12 scale-95 pointer-events-none'}`}>
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="font-mono text-[0.6rem] text-gold border border-gold/30 px-2 py-0.5 rounded">SEC_03</span>
+                  <h2 className="font-serif text-2xl md:text-3xl text-white">Engine</h2>
+                </div>
+
+                {/* Skill selector icons */}
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {skillCategories.map((cat, idx) => {
+                    const isSelected = activeSkill === idx
+                    return (
+                      <button 
+                        key={idx}
+                        onClick={() => setActiveSkill(idx)}
+                        className={`p-3 rounded-lg border text-left flex items-center justify-between transition-all duration-300 ${isSelected ? 'border-gold bg-gold/5' : 'border-white-faint bg-white-faint hover:bg-navy-mid/20'}`}
+                      >
+                        <div className="max-w-[70%]">
+                          <div className={`font-serif text-[0.75rem] leading-tight ${isSelected ? 'text-white' : 'text-white-dim'}`}>{cat.name.split(' & ')[0]}</div>
+                        </div>
+                        <div className="relative w-8 h-8 flex items-center justify-center flex-shrink-0">
+                          {/* Circular SVG Ring */}
+                          <svg className="progress-ring w-8 h-8 absolute inset-0">
+                            <circle className="stroke-white-faint" strokeWidth="1.5" fill="transparent" r="12" cx="16" cy="16" />
+                            <circle 
+                              className="stroke-gold progress-ring-circle" 
+                              strokeWidth="1.5" 
+                              fill="transparent" 
+                              r="12" 
+                              cx="16" 
+                              cy="16" 
+                              strokeDasharray={`${2 * Math.PI * 12}`}
+                              strokeDashoffset={`${2 * Math.PI * 12 * (1 - cat.percentage / 100)}`}
+                            />
+                          </svg>
+                          <span className="font-mono text-[0.55rem] text-gold font-semibold">{cat.percentage}%</span>
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+
+                {/* Subskill list chips */}
+                <div className="bg-navy-mid/10 border border-white-faint p-4 rounded-xl">
+                  <div className="font-mono text-[0.52rem] uppercase tracking-wider text-gold mb-3">Core Modules Deployed</div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {skillCategories[activeSkill].items.map((sub, i) => (
+                      <span key={i} className="font-mono text-[0.55rem] text-white border border-gold/15 px-2.5 py-1 rounded bg-navy-mid/30">
+                        {sub}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="font-mono text-[0.52rem] text-white-dim uppercase tracking-wider mt-4">
+                * Built with high enterprise telemetry pipelines.
+              </div>
+            </div>
+
+            {/* WRITING SECTION VIEW */}
+            <div className={`absolute inset-0 glass-panel p-8 flex flex-col justify-between transition-all duration-500 ease-out ${activeSection === 'writing' ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-x-12 scale-95 pointer-events-none'}`}>
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="font-mono text-[0.6rem] text-gold border border-gold/30 px-2 py-0.5 rounded">SEC_04</span>
+                  <h2 className="font-serif text-2xl md:text-3xl text-white">Insights</h2>
+                </div>
+
+                {/* Minimal micro-article list */}
+                <div className="space-y-4">
+                  {blogs.map((b, i) => (
+                    <div key={i} className="group border-b border-white-faint pb-3.5 last:border-b-0 cursor-pointer">
+                      <div className="flex items-center justify-between font-mono text-[0.52rem] text-gold mb-1">
+                        <span>{b.date}</span>
+                        <span>{b.readTime}</span>
+                      </div>
+                      <h3 className="font-serif text-[0.98rem] text-white group-hover:text-gold transition-colors leading-tight">{b.title}</h3>
+                      <p className="text-[0.72rem] text-white-dim font-light mt-1 line-clamp-1">{b.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button className="glow-btn w-full">
+                Launch Feed ↗
+              </button>
+            </div>
+
+            {/* EXPERIENCE SECTION VIEW */}
+            <div className={`absolute inset-0 glass-panel p-8 flex flex-col justify-between transition-all duration-500 ease-out ${activeSection === 'experience' ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-x-12 scale-95 pointer-events-none'}`}>
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="font-mono text-[0.6rem] text-gold border border-gold/30 px-2 py-0.5 rounded">SEC_05</span>
+                  <h2 className="font-serif text-2xl md:text-3xl text-white">Chronology</h2>
+                </div>
+
+                {/* Minimalist Timeline milestones */}
+                <div className="relative border-l border-gold/20 pl-4 space-y-6 py-2">
+                  {experience.map((exp, i) => (
+                    <div key={i} className="relative">
+                      {/* Timeline gold indicator */}
+                      <span className="absolute -left-[21px] top-1.5 w-2 h-2 rounded-full bg-gold shadow-[0_0_8px_rgba(201,168,76,0.8)]" />
+                      
+                      <div className="font-mono text-[0.52rem] text-gold leading-none mb-1">{exp.period}</div>
+                      <div className="flex items-baseline justify-between">
+                        <span className="font-serif text-[0.95rem] text-white font-medium">{exp.company}</span>
+                        <span className="font-mono text-[0.6rem] text-white-dim font-light">{exp.role}</span>
+                      </div>
+                      <p className="text-[0.75rem] text-white-dim font-light mt-1 pl-2 border-l border-white-faint">
+                        {exp.highlight}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="font-mono text-[0.52rem] text-white-dim uppercase tracking-wider mt-4">
+                * Track records validated and cryptographically verified.
+              </div>
+            </div>
+
+            {/* CONTACT SECTION VIEW */}
+            <div className={`absolute inset-0 glass-panel p-8 flex flex-col justify-between transition-all duration-500 ease-out ${activeSection === 'contact' ? 'opacity-100 translate-x-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-x-12 scale-95 pointer-events-none'}`}>
+              <div>
+                <div className="flex items-center gap-3 mb-8">
+                  <span className="font-mono text-[0.6rem] text-gold border border-gold/30 px-2 py-0.5 rounded">SEC_06</span>
+                  <h2 className="font-serif text-2xl md:text-3xl text-white">Beacon</h2>
+                </div>
+
+                <h3 className="font-serif text-3xl text-white mb-4 leading-tight">
+                  Let's deploy <br /><em className="italic text-gold font-normal">something real.</em>
+                </h3>
+                <p className="text-[0.82rem] text-white-dim leading-[1.6] mb-8 font-light">
+                  Open to enterprise AI architect opportunities, agentic automations, or voice systems. Reach out to hook up pipelines.
+                </p>
+
+                {/* Sleek cyber contacts */}
+                <div className="grid grid-cols-1 gap-2.5">
+                  <a 
+                    href="mailto:jatinagrawal942@gmail.com" 
+                    className="flex items-center justify-between px-4 py-3 bg-white-faint border border-white-faint rounded-lg font-mono text-[0.68rem] tracking-wider text-white-dim hover:text-gold hover:border-gold/30 hover:bg-navy-mid/20 transition-all"
+                  >
+                    <span>✉ EMAIL // SECURE</span>
+                    <span className="text-gold">jatinagrawal942@gmail.com</span>
+                  </a>
+                  <a 
+                    href="https://linkedin.com/in/jatin--agrawal" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center justify-between px-4 py-3 bg-white-faint border border-white-faint rounded-lg font-mono text-[0.68rem] tracking-wider text-white-dim hover:text-gold hover:border-gold/30 hover:bg-navy-mid/20 transition-all"
+                  >
+                    <span>↗ LINKEDIN // PUBLIC</span>
+                    <span className="text-gold">jatin--agrawal</span>
+                  </a>
+                  <a 
+                    href="tel:+917773066808" 
+                    className="flex items-center justify-between px-4 py-3 bg-white-faint border border-white-faint rounded-lg font-mono text-[0.68rem] tracking-wider text-white-dim hover:text-gold hover:border-gold/30 hover:bg-navy-mid/20 transition-all"
+                  >
+                    <span>✆ TELEPHONY // VOICE</span>
+                    <span className="text-gold">+91 7773066808</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="font-mono text-[0.52rem] text-white-dim uppercase text-center mt-6 tracking-widest opacity-45 animate-pulse">
+                SYS.READY // CONNECT BEACON OUT
+              </div>
+            </div>
+
+          </div>
+
+          {/* RIGHT VIEW INFO OVERLAY (Ambient, subtle visual layout balance helper) */}
+          <div className="hidden lg:flex flex-col items-end gap-16 pointer-events-none select-none text-right">
+            <div className="border-r-2 border-gold/40 pr-5 py-2 animate-pulse">
+              <span className="font-mono text-[0.52rem] uppercase tracking-widest text-gold block">GL_STREAMING</span>
+              <span className="font-serif text-[1.8rem] text-white font-light mt-1 block">Active Telemetry</span>
+            </div>
+            
+            {/* Visual ambient graphics (dynamic neon layout) */}
+            <div className="relative w-32 h-[120px] border border-white-faint bg-white-faint rounded-lg flex items-center justify-center overflow-hidden">
+              <span className="absolute inset-x-0 top-1/2 h-[1px] bg-gold/25 animate-scan" style={{ animation: 'aurora-move-1 4s linear infinite' }} />
+              <div className="font-mono text-[0.5rem] tracking-[0.2em] text-white-dim/40 uppercase">
+                CYBER.GRID
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
     </>
   )
 }
