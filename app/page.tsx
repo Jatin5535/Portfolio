@@ -1,6 +1,27 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+const blogs = [
+  {
+    title: 'Architecting AI Contact Centers at Scale',
+    date: 'May 12, 2026',
+    desc: 'Deep dive into the challenges of building real-time voice-to-voice AI architectures using SIP telephony and multimodal LLMs for government-scale traffic.',
+    readTime: '6 min read'
+  },
+  {
+    title: 'Agentic Workflows in Cloud Operations',
+    date: 'March 28, 2026',
+    desc: 'How we transitioned from static runbooks to conversational, autonomous agents for handling ITSM and CI/CD pipelines.',
+    readTime: '5 min read'
+  },
+  {
+    title: 'Beyond RAG: The Future of Enterprise AI',
+    date: 'February 15, 2026',
+    desc: 'Retrieval-Augmented Generation is just the beginning. Exploring self-correcting deterministic parsers and bounded execution loops.',
+    readTime: '8 min read'
+  }
+]
 
 const projects = [
   {
@@ -72,6 +93,7 @@ const skills = [
 export default function Home() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const cursor = cursorRef.current
@@ -126,12 +148,16 @@ export default function Home() {
       {/* NAV */}
       <nav className="nav">
         <a href="#" className="nav-logo mono">JA</a>
-        <ul className="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <button className={`nav-toggle ${isMenuOpen ? 'open' : ''}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <span className="hamburger"></span>
+        </button>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About</a></li>
+          <li><a href="#projects" onClick={() => setIsMenuOpen(false)}>Projects</a></li>
+          <li><a href="#skills" onClick={() => setIsMenuOpen(false)}>Skills</a></li>
+          <li><a href="#blog" onClick={() => setIsMenuOpen(false)}>Writing</a></li>
+          <li><a href="#experience" onClick={() => setIsMenuOpen(false)}>Experience</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
         </ul>
       </nav>
 
@@ -139,32 +165,40 @@ export default function Home() {
       <section className="hero" id="home">
         <div className="hero-grid" />
         <div className="hero-glow" />
-        <div className="hero-content">
-          <div className="hero-tag mono">AI Engineer · Solutions Architect</div>
-          <h1 className="hero-name display">
-            Jatin<br /><em>Agrawal</em>
-          </h1>
-          <p className="hero-title display">Building AI tools that solve real problems.</p>
-          <p className="hero-desc">
-            I'm an AI Engineer currently working at an Enterprise Innovation Lab. I focus on building practical AI systems—from voice-based contact centers to automated cloud workflows—that actually make a difference.
-          </p>
-          <div className="hero-stats">
-            <div className="stat-item">
-              <div className="stat-num display">15+</div>
-              <div className="stat-label mono">AI Solutions Built</div>
+        <div className="hero-inner">
+          <div className="hero-content">
+            <div className="hero-tag mono">AI Engineer · Solutions Architect</div>
+            <h1 className="hero-name display">
+              Jatin<br /><em>Agrawal</em>
+            </h1>
+            <p className="hero-title display">Building AI tools that solve real problems.</p>
+            <p className="hero-desc">
+              I'm an AI Engineer currently working at an Enterprise Innovation Lab. I focus on building practical AI systems—from voice-based contact centers to automated cloud workflows—that actually make a difference.
+            </p>
+            <div className="hero-stats">
+              <div className="stat-item">
+                <div className="stat-num display">15+</div>
+                <div className="stat-label mono">AI Solutions Built</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-num display">4+</div>
+                <div className="stat-label mono">Industries Served</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-num display">50+</div>
+                <div className="stat-label mono">Team Members</div>
+              </div>
             </div>
-            <div className="stat-item">
-              <div className="stat-num display">4+</div>
-              <div className="stat-label mono">Industries Served</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-num display">50+</div>
-              <div className="stat-label mono">Team Members</div>
+            <div className="hero-cta">
+              <a href="#projects" className="btn-primary">View Work</a>
+              <a href="#contact" className="btn-ghost">Get In Touch</a>
             </div>
           </div>
-          <div className="hero-cta">
-            <a href="#projects" className="btn-primary">View Work</a>
-            <a href="#contact" className="btn-ghost">Get In Touch</a>
+          <div className="hero-visual fade-up fade-up-delay-2">
+            <div className="hero-image-wrapper">
+              <img src="/img/6082143393514462268.jpg" alt="Jatin Agrawal" className="hero-image" />
+              <div className="hero-image-accent"></div>
+            </div>
           </div>
         </div>
         <div className="hero-scroll">
@@ -196,6 +230,9 @@ export default function Home() {
             </p>
           </div>
           <div className="about-sidebar fade-up fade-up-delay-2">
+            <div className="about-image-wrapper mb-2">
+              <img src="/img/6082143393514462267.jpg" alt="Speaking at an event" className="about-image" />
+            </div>
             <div className="sidebar-block">
               <div className="sidebar-label mono">Currently</div>
               <div className="sidebar-content">AI Engineer at a Global System Integrator. Leading an AI delivery community across 4+ sectors.</div>
@@ -263,10 +300,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* BLOG */}
+      <section id="blog">
+        <div className="section-header fade-up">
+          <span className="section-num mono">04</span>
+          <h2 className="section-title display">Writing</h2>
+          <div className="section-line" />
+        </div>
+        <div className="blog-container">
+          <div className="blog-visual fade-up">
+             <img src="/img/6082143393514462270.jpg" alt="Whiteboard session" className="blog-image" />
+          </div>
+          <div className="blog-grid">
+            {blogs.map((b, i) => (
+              <div key={i} className="blog-card fade-up" style={{ transitionDelay: `${i * 0.1}s` }}>
+                <div className="blog-meta mono">
+                  <span>{b.date}</span>
+                  <span className="blog-dot">·</span>
+                  <span>{b.readTime}</span>
+                </div>
+                <h3 className="blog-title display">{b.title}</h3>
+                <p className="blog-desc">{b.desc}</p>
+                <a href="#" className="blog-link mono">Read Article ↗</a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* EXPERIENCE */}
       <section id="experience">
         <div className="section-header fade-up">
-          <span className="section-num mono">04</span>
+          <span className="section-num mono">05</span>
           <h2 className="section-title display">Experience</h2>
           <div className="section-line" />
         </div>
