@@ -4,40 +4,40 @@ import { useEffect, useRef } from 'react'
 
 const projects = [
   {
-    client: 'GeM · Vodafone Idea',
+    client: 'National Gov Marketplace & Top Telecom',
     name: 'AI Contact Centre',
-    desc: 'Real-time voice-to-voice AI contact centre for a government marketplace (GeM) and India\'s third-largest telecom. SIP telephony, RAG-grounded knowledge base, multimodal LLM, and Amazon Connect human escalation.',
-    tags: ['Voice AI', 'AWS', 'RAG', 'Amazon Connect', 'SIP'],
+    desc: 'Real-time voice-to-voice AI contact centre for a national government marketplace and a leading telecom provider. SIP telephony, RAG-grounded knowledge base, multimodal LLM, and human escalation.',
+    tags: ['Voice AI', 'AWS', 'RAG', 'Contact Centre', 'SIP'],
     featured: true,
   },
   {
-    client: 'Bridgestone EMEA',
-    name: 'BridgeAI',
-    desc: 'Conversational agent that captures cloud ops requests in plain English, validates against enterprise knowledge, creates ServiceNow tickets, and auto-triggers Azure DevOps pipelines.',
-    tags: ['Azure', 'ServiceNow', 'ADO', 'Agentic AI'],
+    client: 'Global Automotive Manufacturer',
+    name: 'Agentic IT Operations',
+    desc: 'Conversational agent that captures cloud ops requests in plain English, validates against enterprise knowledge, creates support tickets, and auto-triggers deployment pipelines.',
+    tags: ['Cloud', 'ITSM', 'CI/CD', 'Agentic AI'],
   },
   {
-    client: 'UNFI',
-    name: 'Monarch Parser Platform',
-    desc: 'Replaced a legacy unsupported desktop tool with an agentic AWS platform. XMOD → structured rules → deterministic Python parser → golden-output validation → bounded self-correction loop.',
-    tags: ['AWS Bedrock', 'Step Functions', 'Lambda', 'Agentic'],
+    client: 'Major Food Distributor',
+    name: 'Agentic Document Parser',
+    desc: 'Replaced a legacy unsupported desktop tool with an agentic cloud platform. Unstructured data → structured rules → deterministic parser → golden-output validation → bounded self-correction loop.',
+    tags: ['Cloud AI', 'Serverless', 'Agentic'],
   },
   {
-    client: 'Capital Catering · UAE Aviation',
-    name: 'IRMS Phase 2',
-    desc: 'AI-driven workforce management covering long-term forecasting (3–6 months), scenario-based rostering, and real-time dynamic allocation. Integrated with AODB, BioStar, SAP, COPS.',
-    tags: ['Azure ML', 'Forecasting', 'Rostering', 'SAP'],
+    client: 'UAE Aviation Catering',
+    name: 'Intelligent Rostering System',
+    desc: 'AI-driven workforce management covering long-term forecasting (3–6 months), scenario-based rostering, and real-time dynamic allocation. Integrated with core enterprise systems.',
+    tags: ['Machine Learning', 'Forecasting', 'Rostering', 'ERP'],
   },
   {
-    client: 'TCS Internal',
-    name: 'Aura AI',
-    desc: 'Internal prompt-to-product platform for TCS employees. Describe what you want in natural language — get a deployed full-stack app. GPT-5 for code generation, Gemini for design and planning.',
-    tags: ['GPT-5', 'Gemini', 'React', 'FastAPI', 'Multi-model'],
+    client: 'Global System Integrator (Internal)',
+    name: 'Prompt-to-Product Platform',
+    desc: 'Internal prompt-to-product platform for enterprise employees. Describe what you want in natural language — get a deployed full-stack app. Multi-model approach for code generation, design, and planning.',
+    tags: ['LLMs', 'React', 'FastAPI', 'Multi-model'],
   },
   {
-    client: 'TCS Internal',
-    name: 'Circle4Life Content Engine',
-    desc: 'Suite of scheduled AI agents producing blogs, audio podcasts, news, and community content for TCS\'s employee super-app. 200K downloads, 70K MAU, 5K DAU.',
+    client: 'Global System Integrator (Internal)',
+    name: 'Enterprise Content Engine',
+    desc: 'Suite of scheduled AI agents producing blogs, audio podcasts, news, and community content for an enterprise employee super-app. High adoption with robust daily active usage.',
     tags: ['Content Agents', 'Automation', 'LLM', 'Python'],
   },
 ]
@@ -146,7 +146,7 @@ export default function Home() {
           </h1>
           <p className="hero-title display">Building enterprise AI that works in the real world.</p>
           <p className="hero-desc">
-            At TCS Digital Labs, I architect and ship AI systems across voice, automation, and GenAI — from government-scale contact centres to agentic cloud platforms.
+            At a leading Enterprise Innovation Lab, I architect and ship AI systems across voice, automation, and GenAI — from government-scale contact centres to agentic cloud platforms.
           </p>
           <div className="hero-stats">
             <div className="stat-item">
@@ -154,7 +154,7 @@ export default function Home() {
               <div className="stat-label mono">Projects Shipped</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num display">$20M+</div>
+              <div className="stat-num display">Multi-Million</div>
               <div className="stat-label mono">Revenue Pipeline</div>
             </div>
             <div className="stat-item">
@@ -189,16 +189,16 @@ export default function Home() {
               I'm drawn to the intersection of <strong>AI and real operational complexity</strong> — where the interesting challenge isn't the model, it's the system around it. The validation loops, the human handoffs, the governance, the integration with messy enterprise reality.
             </p>
             <p>
-              I lead the <strong>TCS Trivandrum AI Club</strong> — a 50-member delivery team inside a 15,000+ member innovation community — running hackathons, client PoCs, and the annual Decode event (5,000+ participants).
+              I lead an <strong>Enterprise AI Delivery Team</strong> — a 50-member delivery unit inside a 15,000+ member innovation community — running hackathons, client PoCs, and annual flagship events with 5,000+ participants.
             </p>
             <p>
-              Outside of TCS, I'm interested in getting closer to product thinking. I want to shape what gets built and why — not just execute on what's already scoped.
+              Outside of my current role, I'm interested in getting closer to product thinking. I want to shape what gets built and why — not just execute on what's already scoped.
             </p>
           </div>
           <div className="about-sidebar fade-up fade-up-delay-2">
             <div className="sidebar-block">
               <div className="sidebar-label mono">Currently</div>
-              <div className="sidebar-content">AI Engineer at TCS Digital Labs, Trivandrum. Leading the AI Club and delivering across 4+ sectors.</div>
+              <div className="sidebar-content">AI Engineer at a Global System Integrator. Leading an AI delivery community across 4+ sectors.</div>
             </div>
             <div className="sidebar-block">
               <div className="sidebar-label mono">Education</div>
@@ -274,16 +274,16 @@ export default function Home() {
           <div className="exp-item fade-up">
             <div className="exp-meta">
               <div className="exp-period mono">Aug 2025 — Present</div>
-              <div className="exp-company">Tata Consultancy Services</div>
-              <div className="exp-location">Trivandrum & Indore, India</div>
+              <div className="exp-company">Global System Integrator</div>
+              <div className="exp-location">India</div>
             </div>
             <div className="exp-content">
               <div className="exp-role display">AI Engineer & Solutions Architect</div>
               <ul className="exp-bullets">
-                <li>Led the TCS Trivandrum AI Club — a 50-member delivery team within a 15,000+ member community — contributing to $20M+ in revenue pipeline across 15+ AI solutions.</li>
-                <li>Designed AI contact centre architectures for GeM and Vodafone Idea — integrating SIP telephony, multimodal LLMs, and RAG pipelines at government scale.</li>
-                <li>Built agentic cloud ops automation for Bridgestone EMEA (Azure + ServiceNow + ADO) and an AWS-native document parser platform for UNFI.</li>
-                <li>Architected IRMS Phase 2 for Capital Catering (UAE): AI forecasting, scenario rostering, and real-time dynamic allocation integrated with AODB, BioStar, SAP, COPS.</li>
+                <li>Led an internal AI delivery team of 50 members within a 15,000+ member community — contributing to a multi-million dollar revenue pipeline across 15+ AI solutions.</li>
+                <li>Designed AI contact centre architectures for a national government marketplace and a leading telecom — integrating SIP telephony, multimodal LLMs, and RAG pipelines at government scale.</li>
+                <li>Built agentic cloud ops automation for a global automotive manufacturer and an AWS-native document parser platform for a major food distributor.</li>
+                <li>Architected workforce planning systems for UAE aviation: AI forecasting, scenario rostering, and real-time dynamic allocation integrated with core enterprise ERPs.</li>
                 <li>Led pre-sales solutioning and pitch delivery across government, hospitality, healthcare, and gaming sectors.</li>
               </ul>
             </div>
@@ -291,8 +291,8 @@ export default function Home() {
           <div className="exp-item fade-up fade-up-delay-1">
             <div className="exp-meta">
               <div className="exp-period mono">May 2025 — Aug 2025</div>
-              <div className="exp-company">Apollo JBP Hospitals</div>
-              <div className="exp-location">Jabalpur, India</div>
+              <div className="exp-company">Regional Healthcare Provider</div>
+              <div className="exp-location">India</div>
             </div>
             <div className="exp-content">
               <div className="exp-role display">Head of Patient Experience</div>
@@ -346,7 +346,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer>
         <p className="mono">© 2025 Jatin Agrawal</p>
-        <p className="mono">AI Engineer · TCS Digital Labs</p>
+        <p className="mono">AI Engineer & Solutions Architect</p>
       </footer>
     </>
   )
