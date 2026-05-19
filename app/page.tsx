@@ -144,22 +144,22 @@ export default function Home() {
           <h1 className="hero-name display">
             Jatin<br /><em>Agrawal</em>
           </h1>
-          <p className="hero-title display">Building enterprise AI that works in the real world.</p>
+          <p className="hero-title display">Building AI tools that solve real problems.</p>
           <p className="hero-desc">
-            At a leading Enterprise Innovation Lab, I architect and ship AI systems across voice, automation, and GenAI — from government-scale contact centres to agentic cloud platforms.
+            I'm an AI Engineer currently working at an Enterprise Innovation Lab. I focus on building practical AI systems—from voice-based contact centers to automated cloud workflows—that actually make a difference.
           </p>
           <div className="hero-stats">
             <div className="stat-item">
               <div className="stat-num display">15+</div>
-              <div className="stat-label mono">Projects Shipped</div>
+              <div className="stat-label mono">AI Solutions Built</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num display">Multi-Million</div>
-              <div className="stat-label mono">Revenue Pipeline</div>
+              <div className="stat-num display">4+</div>
+              <div className="stat-label mono">Industries Served</div>
             </div>
             <div className="stat-item">
-              <div className="stat-num display">15K+</div>
-              <div className="stat-label mono">Community Members</div>
+              <div className="stat-num display">50+</div>
+              <div className="stat-label mono">Team Members</div>
             </div>
           </div>
           <div className="hero-cta">
@@ -183,16 +183,16 @@ export default function Home() {
         <div className="about-grid">
           <div className="about-text fade-up fade-up-delay-1">
             <p>
-              I'm a final-year-to-first-year story that skipped the usual script. Most people at my designation are doing ticket work. I ended up leading the architecture on a <em>government-scale AI contact centre</em>, scoping a workforce planning system for UAE aviation, and building an internal prompt-to-product platform — all in the first 10 months.
+              I've always been driven to step outside the traditional career script. Early on, instead of sticking to routine tasks, I found myself helping to design a <em>large-scale AI contact center</em>, mapping out workforce systems for the aviation industry, and building internal AI tools.
             </p>
             <p>
-              I'm drawn to the intersection of <strong>AI and real operational complexity</strong> — where the interesting challenge isn't the model, it's the system around it. The validation loops, the human handoffs, the governance, the integration with messy enterprise reality.
+              What really excites me is the intersection of <strong>AI and real-world complexity</strong>. To me, the most interesting challenge isn't just the AI model itself, but how it fits into the bigger picture—managing the human handoffs, ensuring reliability, and integrating it smoothly into everyday operations.
             </p>
             <p>
-              I lead an <strong>Enterprise AI Delivery Team</strong> — a 50-member delivery unit inside a 15,000+ member innovation community — running hackathons, client PoCs, and annual flagship events with 5,000+ participants.
+              I also have the privilege of leading an <strong>Enterprise AI Delivery Team</strong> of about 50 members. We collaborate within a larger innovation community to run hackathons, build proof-of-concepts, and host tech events.
             </p>
             <p>
-              Outside of my current role, I'm interested in getting closer to product thinking. I want to shape what gets built and why — not just execute on what's already scoped.
+              Looking forward, I'm eager to get more involved in product thinking. I want to help shape <em>what</em> we build and <em>why</em> we build it, rather than just figuring out how to build it.
             </p>
           </div>
           <div className="about-sidebar fade-up fade-up-delay-2">
@@ -280,11 +280,11 @@ export default function Home() {
             <div className="exp-content">
               <div className="exp-role display">AI Engineer & Solutions Architect</div>
               <ul className="exp-bullets">
-                <li>Led an internal AI delivery team of 50 members within a 15,000+ member community — contributing to a multi-million dollar revenue pipeline across 15+ AI solutions.</li>
-                <li>Designed AI contact centre architectures for a national government marketplace and a leading telecom — integrating SIP telephony, multimodal LLMs, and RAG pipelines at government scale.</li>
-                <li>Built agentic cloud ops automation for a global automotive manufacturer and an AWS-native document parser platform for a major food distributor.</li>
-                <li>Architected workforce planning systems for UAE aviation: AI forecasting, scenario rostering, and real-time dynamic allocation integrated with core enterprise ERPs.</li>
-                <li>Led pre-sales solutioning and pitch delivery across government, hospitality, healthcare, and gaming sectors.</li>
+                <li>Led an internal AI delivery team of 50 members, collaborating on over 15 different AI solutions and proof-of-concepts for various industries.</li>
+                <li>Helped design scalable AI contact center architectures for a national government marketplace and a leading telecom provider, integrating voice telephony and AI models.</li>
+                <li>Developed automated cloud operations tools for a global automotive manufacturer and an AWS-native document parser for a major food distributor.</li>
+                <li>Contributed to workforce planning systems for the aviation sector, focusing on AI forecasting, rostering, and ERP integration.</li>
+                <li>Assisted with pre-sales solutioning and presented technical pitches across the government, hospitality, healthcare, and gaming sectors.</li>
               </ul>
             </div>
           </div>
@@ -297,9 +297,9 @@ export default function Home() {
             <div className="exp-content">
               <div className="exp-role display">Head of Patient Experience</div>
               <ul className="exp-bullets">
-                <li>Built end-to-end call centre and patient communication system from scratch; scaled to 1,000+ daily inquiries via phone and WhatsApp.</li>
-                <li>Implemented WhatsApp Business automation, reducing query resolution time by 40%.</li>
-                <li>Led launch SEO and Meta Ads strategy, driving a 60% uplift in appointment bookings during peak campaigns.</li>
+                <li>Built an end-to-end call center and patient communication system from scratch, scaling it to handle 1,000+ daily inquiries via phone and WhatsApp.</li>
+                <li>Implemented WhatsApp Business automation to help resolve patient queries more efficiently.</li>
+                <li>Managed the launch strategy for SEO and Meta Ads, which increased appointment bookings during peak campaigns.</li>
               </ul>
             </div>
           </div>
