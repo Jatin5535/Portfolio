@@ -3,8 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    @apply bg-navy text-white font-sans font-normal leading-relaxed tracking-wide h-screen w-screen overflow-hidden select-none relative;
+    @apply bg-navy text-white font-sans font-normal leading-relaxed tracking-wide overflow-x-hidden relative;
   }
   
   a, button {
@@ -12,124 +16,67 @@
   }
 }
 
-/* Custom cursor for high-end aesthetic */
-@media (pointer: fine) {
-  .cursor {
-    @apply w-2 h-2 bg-gold rounded-full fixed pointer-events-none z-[9999] transition-transform duration-100 ease-out;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring {
-    @apply w-8 h-8 border border-gold/30 rounded-full fixed pointer-events-none z-[9998] transition-all duration-300 ease-out;
-    transform: translate(-50%, -50%);
-  }
-  .cursor-ring.hovering {
-    @apply w-12 h-12 border-gold bg-gold/5 scale-110;
-  }
+/* Custom scrollbars for serious systems look */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #030712;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 76, 0.15);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 168, 76, 0.4);
 }
 
-/* Custom scrollbars for details inside glass panels */
-.custom-scroll::-webkit-scrollbar {
-  width: 4px;
-}
-.custom-scroll::-webkit-scrollbar-track {
-  background: rgba(245, 240, 232, 0.02);
-  border-radius: 4px;
-}
-.custom-scroll::-webkit-scrollbar-thumb {
-  background: rgba(201, 168, 76, 0.2);
-  border-radius: 4px;
-}
-.custom-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(201, 168, 76, 0.6);
-}
-
-/* Noise overlay */
+/* Premium noise texture */
 .noise-overlay {
   content: '';
-  @apply fixed inset-0 pointer-events-none z-[999] opacity-[0.035];
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  @apply fixed inset-0 pointer-events-none z-[999] opacity-[0.025];
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
-/* Cybernetic scanlines */
-.scanlines {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.2) 50%
-  ), linear-gradient(
-    90deg,
-    rgba(255, 0, 0, 0.03),
-    rgba(0, 255, 0, 0.01),
-    rgba(0, 0, 255, 0.03)
-  );
-  background-size: 100% 4px, 6px 100%;
-  z-index: 998;
-  opacity: 0.15;
-}
-
-/* High-End Glassmorphism */
-.glass-panel {
-  @apply bg-navy/40 border border-gold/15 backdrop-blur-xl rounded-2xl shadow-[0_8px_32px_0_rgba(13,22,36,0.5)] transition-all duration-500 ease-out;
-}
-
-.glass-panel:hover {
-  @apply border-gold/25 shadow-[0_8px_32px_0_rgba(201,168,76,0.06)];
-}
-
-.glass-card {
-  @apply bg-white-faint border border-border-faint hover:border-gold/20 hover:bg-navy-mid/30 transition-all duration-300 rounded-xl;
-}
-
-/* Grid background behind 3D canvas */
-.hero-grid {
+/* Systems Blueprint Grid Overlay */
+.blueprint-grid {
   @apply absolute inset-0 pointer-events-none z-0;
   background-image:
-    linear-gradient(rgba(201, 168, 76, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 168, 76, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 100%);
-  opacity: 0.7;
+    linear-gradient(rgba(245, 240, 232, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 240, 232, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 40%, transparent 100%);
 }
 
-/* Circular Skill Indicators */
-.progress-ring {
-  transform: rotate(-90deg);
+/* Calm, Premium Card Styling (Palantir/Linear style) */
+.architect-card {
+  @apply bg-[#080d16]/60 border border-white/[0.04] rounded-xl hover:border-gold/20 hover:bg-[#0b1422]/70 transition-all duration-300 shadow-[0_4px_24px_rgba(3,7,18,0.2)];
 }
 
-.progress-ring-circle {
-  transition: stroke-dashoffset 0.6s ease-out;
+/* Soft gold ambient glows */
+.gold-glow-mesh {
+  @apply absolute w-[500px] h-[500px] rounded-full blur-[140px] opacity-[0.06] pointer-events-none z-0;
+  background: radial-gradient(circle, #c9a84c 0%, transparent 70%);
 }
 
-/* Neon text & glow helpers */
-.text-glow {
-  text-shadow: 0 0 10px rgba(201, 168, 76, 0.4);
+.blue-glow-mesh {
+  @apply absolute w-[600px] h-[600px] rounded-full blur-[160px] opacity-[0.08] pointer-events-none z-0;
+  background: radial-gradient(circle, #0ea5e9 0%, transparent 70%);
 }
 
-.glow-btn {
-  @apply relative overflow-hidden transition-all duration-300 border border-gold text-white font-mono text-[0.7rem] uppercase tracking-widest px-6 py-3 bg-transparent;
-  box-shadow: inset 0 0 0 0 rgba(201, 168, 76, 0.3);
+/* Clean, modern CTA buttons */
+.btn-primary {
+  @apply inline-flex items-center gap-2 font-mono text-[0.72rem] tracking-wider uppercase bg-white text-navy font-semibold px-6 py-3 border border-white hover:bg-transparent hover:text-white transition-all duration-300;
 }
 
-.glow-btn::before {
-  content: '';
-  @apply absolute inset-0 bg-gold/10 -translate-x-full transition-transform duration-300 ease-out z-[-1];
+.btn-secondary {
+  @apply inline-flex items-center gap-2 font-mono text-[0.72rem] tracking-wider uppercase bg-transparent text-white-dim hover:text-white px-6 py-3 border border-white/[0.08] hover:border-white/30 transition-all duration-300;
 }
 
-.glow-btn:hover::before {
-  @apply translate-x-0;
+/* Controlled Line Lengths for technical reading readability */
+.text-controlled {
+  @apply max-w-xl text-white-dim text-[0.92rem] leading-relaxed font-light;
 }
 
-.glow-btn:hover {
-  box-shadow: 0 0 15px rgba(201, 168, 76, 0.25);
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-  @apply border-gold-light;
-}
-
-/* Radial aurora lights */
-.aurora-glow {
-  @apply absolute rounded-full blur-[120px] opacity-15 mix-blend-screen pointer-events-none z-0;
-}
 
 
